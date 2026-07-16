@@ -103,6 +103,9 @@
   .lg-item .tx{line-height:1.3;}
   .lg-item .tx small{display:block; color:var(--muted); font-size:10.5px; font-weight:500;}
   #legend footer{flex:none; padding:10px 15px 12px; border-top:1px solid var(--line); font-size:10.5px; color:var(--muted); line-height:1.55;}
+  #legend footer .zl{margin-bottom:6px; line-height:1.9;}
+  #legend footer .zl i{display:inline-block; width:10px; height:10px; border-radius:3px; margin:0 5px 0 0; vertical-align:-1px;}
+  #legend footer .zl span{margin-right:9px; white-space:nowrap;}
   #legend footer b{color:#c8dcd0; font-weight:650;}
   #legendToggle{position:absolute; top:76px; right:14px; z-index:8; appearance:none; border:1px solid var(--line);
        background:var(--panel); color:var(--txt); font:inherit; font-size:12px; font-weight:650;
@@ -273,7 +276,9 @@
       <h2>สารบัญพื้นที่ · กดเพื่อพาไปดู</h2>
     </header>
     <div id="legendList"></div>
-    <footer><b>เกณฑ์ GMP:</b> แยกสายทางวัตถุดิบ–คน แบ่งโซนสถานะชัดเจน (กักกัน/ปล่อยผ่าน/ไม่ผ่าน) และคุมทิศทางไหลของงานจากรับเข้า → ผลิต → บรรจุ → คลังจ่ายออก</footer>
+    <footer>
+    <div class="zl"><span><i style="background:#cfc38e"></i>ขาเข้า/วัตถุดิบ</span><span><i style="background:#b9c7ba"></i>ไลน์ผลิต</span><span><i style="background:#9cc7be"></i>สายยาน้ำ</span><span><i style="background:#a7c2d6"></i>โซนบรรจุ–คลังออก</span></div>
+    <b>เกณฑ์ GMP:</b> แยกสายทางวัตถุดิบ–คน แบ่งโซนสถานะชัดเจน (กักกัน/ปล่อยผ่าน/ไม่ผ่าน) และคุมทิศทางไหลของงานจากรับเข้า → ผลิต → บรรจุ → คลังจ่ายออก</footer>
   </aside>
   <button id="legendToggle">
     <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 4h11M2.5 8h11M2.5 12h7"/></svg>
@@ -4087,6 +4092,10 @@ var MAT = {
   vinyl    : new THREE.MeshStandardMaterial({map:epoxyTex('#c3d0d8',3,3), roughness:.28, metalness:.05}),
   vinyl2   : new THREE.MeshStandardMaterial({map:epoxyTex('#b8c7d1',3,3), roughness:.28, metalness:.05}),
   tile     : new THREE.MeshStandardMaterial({map:epoxyTex('#b4bdba',4,4), roughness:.26, metalness:.05}),
+  epoxyYellow: new THREE.MeshStandardMaterial({map:epoxyTex('#cfc38e',4,3), roughness:.3, metalness:.05}),
+  epoxyBlue  : new THREE.MeshStandardMaterial({map:epoxyTex('#a7c2d6',4,3), roughness:.3, metalness:.05}),
+  epoxyBlueHall: new THREE.MeshStandardMaterial({map:epoxyTex('#96b5cc',5,2), roughness:.2, metalness:.08}),
+  epoxyTeal  : new THREE.MeshStandardMaterial({map:epoxyTex('#9cc7be',4,3), roughness:.3, metalness:.05}),
   ss       : new THREE.MeshStandardMaterial({color:0xd8dcdf, roughness:.28, metalness:.85, envMap:envCube}),
   ssDull   : new THREE.MeshStandardMaterial({color:0xc2c8cc, roughness:.45, metalness:.7, envMap:envCube}),
   steelBlue: new THREE.MeshStandardMaterial({color:0x39628f, roughness:.5, metalness:.35}),
@@ -4164,20 +4173,20 @@ function at(m, px, py, y){ m.position.set(WX(px), y||0, WZ(py)); world.add(m); r
 // ============================================================
 var ROOMS = [
  // ---- middle band: airlocks + production line corridor (y 4.8-7.2)
- {id:'alin', no:3, th:'A/L ทางเข้าวัตถุดิบ', en:'Airlock · Material Entry', x0:0,y0:4.8,x1:2.0,y1:7.2, floor:'epoxy', grp:'store',
+ {id:'alin', no:3, th:'A/L ทางเข้าวัตถุดิบ', en:'Airlock · Material Entry', x0:0,y0:4.8,x1:2.0,y1:7.2, floor:'epoxyYellow', grp:'store',
   desc:'วัตถุดิบเข้าจากประตูฝั่งตะวันตก ผ่านแอร์ล็อกชั้นที่ 1 ก่อนเข้าสู่ไลน์ผลิต'},
- {id:'alin2', th:'A/L ชั้นที่ 2', en:'Airlock · Stage 2', x0:2.0,y0:4.8,x1:3.2,y1:7.2, floor:'epoxy', grp:'store',
+ {id:'alin2', th:'A/L ชั้นที่ 2', en:'Airlock · Stage 2', x0:2.0,y0:4.8,x1:3.2,y1:7.2, floor:'epoxyYellow', grp:'store',
   desc:'แอร์ล็อกชั้นที่สองของทางเข้าวัตถุดิบ ประตูเปิดทีละบานกันการปนเปื้อนเข้าไลน์ผลิต'},
  {id:'hall', th:'ไลน์ผลิต (โถงกลาง)', en:'Production Line Corridor', x0:3.2,y0:4.8,x1:21.6,y1:7.2, floor:'epoxyHall', grp:'prod',
   desc:'โถงไลน์ผลิตกว้าง 2.4 ม. พาดกลางอาคาร ทุกห้องเปิดเข้าหาโถงนี้ ปลายทางทิศตะวันออกผ่าน A/L สู่คลังสำเร็จรูป'},
- {id:'alE', th:'A/L ออกคลังสำเร็จรูป', en:'Airlock · To FG Store', x0:21.6,y0:4.8,x1:22.6,y1:7.2, floor:'epoxy', grp:'prod',
+ {id:'alE', th:'A/L ออกคลังสำเร็จรูป', en:'Airlock · To FG Store', x0:21.6,y0:4.8,x1:22.6,y1:7.2, floor:'epoxyBlue', grp:'prod',
   desc:'แอร์ล็อกท้ายไลน์ผลิต คั่นโซนผลิตกับโถงคลังสำเร็จรูปฝั่งตะวันออก'},
- {id:'hallE', th:'โถงคลัง / จ่ายสินค้า', en:'FG Corridor · Dispatch', x0:22.6,y0:4.8,x1:28,y1:7.2, floor:'epoxyHall', grp:'store',
+ {id:'hallE', th:'โถงคลัง / จ่ายสินค้า', en:'FG Corridor · Dispatch', x0:22.6,y0:4.8,x1:28,y1:7.2, floor:'epoxyBlueHall', grp:'store',
   desc:'โถงฝั่งคลังสำเร็จรูป มีประตูจ่ายสินค้าออกทางทิศตะวันออก — คนละฝั่งกับทางเข้าวัตถุดิบ'},
  // ---- north row (y 7.2-12, west -> east)
  {id:'ro', th:'ห้องระบบน้ำ RO', en:'RO Water Plant', x0:0,y0:7.2,x1:2.2,y1:12, floor:'epoxy', grp:'util',
   desc:'ระบบผลิตน้ำ RO สำหรับใช้ทั้งโรงงาน — ถังพักน้ำ เมมเบรน RO และปั๊มจ่าย อยู่นอกไลน์ผลิต มีประตูเข้าจากภายนอกฝั่งตะวันตก แต่อยู่ในตัวอาคารเดียวกัน'},
- {id:'rm', no:1, th:'ห้องเก็บวัตถุดิบ', en:'Raw Material Store', x0:2.2,y0:7.2,x1:6.6,y1:12, floor:'concrete', grp:'store',
+ {id:'rm', no:1, th:'ห้องเก็บวัตถุดิบ', en:'Raw Material Store', x0:2.2,y0:7.2,x1:6.6,y1:12, floor:'epoxyYellow', grp:'store',
   desc:'คลังวัตถุดิบสมุนไพร ชั้นวางพาเลท กระสอบ และถังวัตถุดิบ พร้อมโซนกักกันรอผลตรวจ (เส้นเหลือง)'},
  {id:'sample', th:'ห้องสุ่ม (ตัวอย่าง)', en:'Sampling Room', x0:6.6,y0:7.2,x1:8.9,y1:12, floor:'vinyl', grp:'support',
   desc:'ห้องสุ่มตัวอย่างวัตถุดิบในบูธ ลดการฟุ้งกระจาย ก่อนตัดสินปล่อยผ่านเข้าใช้งาน'},
@@ -4187,17 +4196,17 @@ var ROOMS = [
   desc:'ตู้อบลมร้อนสำหรับอบแห้งเครื่องมือ/ภาชนะหลังล้าง ก่อนส่งเก็บห้องอุปกรณ์สะอาด'},
  {id:'cleanstore', th:'ห้องเก็บอุปกรณ์ (สะอาด)', en:'Clean Equipment Store', x0:13.5,y0:7.2,x1:15.8,y1:12, floor:'vinyl', grp:'support',
   desc:'เก็บอุปกรณ์เครื่องมือที่ทำความสะอาดและอบแห้งแล้ว บนชั้นสแตนเลส คว่ำภาชนะกันฝุ่น'},
- {id:'liqAL', th:'A/L สายยาน้ำ (สองทาง)', en:'Airlock · Liquid Suite', x0:17.4,y0:7.2,x1:18.6,y1:8.4, floor:'epoxy', grp:'prod',
+ {id:'liqAL', th:'A/L สายยาน้ำ (สองทาง)', en:'Airlock · Liquid Suite', x0:17.4,y0:7.2,x1:18.6,y1:8.4, floor:'epoxyTeal', grp:'prod',
   desc:'แอร์ล็อกร่วมของสายยาน้ำ — จากไลน์ผลิตเข้าได้สองทาง: ห้องบรรจุยาน้ำ และห้องผสมยาน้ำ ป้องกันการปนเปื้อนเข้าจุดสัมผัสยา'},
- {id:'liqfill', th:'ห้องบรรจุยาน้ำ', en:'Liquid Filling Room', x0:15.8,y0:7.2,x1:18.6,y1:12, floor:'epoxy', grp:'prod',
+ {id:'liqfill', th:'ห้องบรรจุยาน้ำ', en:'Liquid Filling Room', x0:15.8,y0:7.2,x1:18.6,y1:12, floor:'epoxyTeal', grp:'prod',
   desc:'บรรจุยาน้ำลงขวด — เข้าห้องได้ผ่านแอร์ล็อกของตัวเองเท่านั้น มีถังพักยาและสายบรรจุ'},
- {id:'liqmix', th:'ห้องผสมยาน้ำ', en:'Liquid Mixing Room', x0:18.6,y0:7.2,x1:21.6,y1:12, floor:'epoxy', grp:'prod',
+ {id:'liqmix', th:'ห้องผสมยาน้ำ', en:'Liquid Mixing Room', x0:18.6,y0:7.2,x1:21.6,y1:12, floor:'epoxyTeal', grp:'prod',
   desc:'ถังผสม/เตรียมยาน้ำ พร้อมแผงควบคุม — ไม่มีประตูออกไลน์โดยตรง เข้าออกผ่านแอร์ล็อกร่วมของสายยาน้ำเท่านั้น'},
- {id:'pkmat', th:'ห้องเก็บวัสดุบรรจุ', en:'Packaging Materials Store', x0:21.6,y0:7.2,x1:24.0,y1:10.3, floor:'concrete', grp:'store',
+ {id:'pkmat', th:'ห้องเก็บวัสดุบรรจุ', en:'Packaging Materials Store', x0:21.6,y0:7.2,x1:24.0,y1:10.3, floor:'epoxyBlue', grp:'store',
   desc:'เก็บขวด ฝา กล่อง และวัสดุการบรรจุ แยกจากวัตถุดิบ เบิกเข้าไลน์ผลิตได้โดยตรง — มีห้องเก็บฉลากบรรจุภัณฑ์เป็นห้องลูกอยู่ด้านใน'},
- {id:'stab', no:8, th:'ห้องเก็บ Stability', en:'Stability Samples', x0:24.0,y0:7.2,x1:26.1,y1:12, floor:'vinyl', grp:'support',
+ {id:'stab', no:8, th:'ห้องเก็บ Stability', en:'Stability Samples', x0:24.0,y0:7.2,x1:26.1,y1:12, floor:'epoxyBlue', grp:'support',
   desc:'เก็บตัวอย่างศึกษาความคงสภาพและตัวอย่างอ้างอิงแต่ละรุ่นผลิต ควบคุมสภาวะ'},
- {id:'chgN', th:'ห้องเปลี่ยนชุด (บน)', en:'Change Room · North', x0:26.1,y0:7.2,x1:28,y1:12, floor:'vinyl2', grp:'support',
+ {id:'chgN', th:'ห้องเปลี่ยนชุด (บน)', en:'Change Room · North', x0:26.1,y0:7.2,x1:28,y1:12, floor:'epoxyBlue', grp:'support',
   desc:'ห้องเปลี่ยนชุดฝั่งเหนือ สำหรับพนักงานโซนคลัง/สายยาน้ำ ล็อกเกอร์และม้านั่งก้าวข้าม'},
  // ---- south row (y 0-4.8, west -> east)
  {id:'staff', th:'ทางเข้าพนักงาน / ห้องส้วม', en:'Staff Entry · Toilet', x0:0,y0:0,x1:2.6,y1:4.8, floor:'vinyl2', grp:'support',
@@ -4216,11 +4225,11 @@ var ROOMS = [
   desc:'เครื่องขัดเม็ดยา (deduster/polisher) ขัดผิว คัดฝุ่น และคัดแยกเม็ดก่อนส่งเข้าสายบรรจุ พร้อมโต๊ะตรวจคุณภาพเม็ด'},
  {id:'bottlefill', th:'ห้องบรรจุใส่ขวด / กระปุก', en:'Bottle / Jar Filling', x0:18.6,y0:0,x1:21.5,y1:4.8, floor:'epoxy', grp:'prod',
   desc:'สายบรรจุแคปซูล/เม็ดลงขวด-กระปุก พร้อมเครื่องปิดฝาและสายลำเลียง'},
- {id:'labelroom', th:'ห้องติดฉลาก', en:'Labelling Room', x0:21.5,y0:0,x1:24.0,y1:4.8, floor:'epoxy', grp:'prod',
+ {id:'labelroom', th:'ห้องติดฉลาก', en:'Labelling Room', x0:21.5,y0:0,x1:24.0,y1:4.8, floor:'epoxyBlue', grp:'prod',
   desc:'อยู่ฝั่งโถงคลัง (หลัง A/L ท้ายไลน์) — ติดฉลาก ตรวจนับ บรรจุกล่อง แล้วส่งเข้าคลังสำเร็จรูป'},
- {id:'fg', th:'ห้องเก็บผลิตภัณฑ์สำเร็จรูป', en:'Finished Goods Store', x0:24.0,y0:0,x1:28,y1:4.8, floor:'concrete', grp:'store',
+ {id:'fg', th:'ห้องเก็บผลิตภัณฑ์สำเร็จรูป', en:'Finished Goods Store', x0:24.0,y0:0,x1:28,y1:4.8, floor:'epoxyBlue', grp:'store',
   desc:'คลังสำเร็จรูปฝั่งตะวันออก รับสินค้าผ่าน A/L ท้ายไลน์ — คนละฝั่งกับทางเข้าวัตถุดิบ จ่ายออกประตูตะวันออก'},
- {id:'lblstore', th:'ห้องเก็บฉลากบรรจุภัณฑ์', en:'Label Store', x0:21.6,y0:10.3,x1:24.0,y1:12, floor:'vinyl', grp:'store',
+ {id:'lblstore', th:'ห้องเก็บฉลากบรรจุภัณฑ์', en:'Label Store', x0:21.6,y0:10.3,x1:24.0,y1:12, floor:'epoxyBlue', grp:'store',
   desc:'ห้องล็อกเก็บฉลากและบรรจุภัณฑ์พิมพ์ อยู่ติดกับห้องเก็บวัสดุบรรจุ (เข้าออกผ่านกันได้) ควบคุมการเบิกจ่ายกันปะปนข้ามรุ่น'}
 ];
 

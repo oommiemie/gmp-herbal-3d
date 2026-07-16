@@ -103,6 +103,9 @@
   .lg-item .tx{line-height:1.3;}
   .lg-item .tx small{display:block; color:var(--muted); font-size:10.5px; font-weight:500;}
   #legend footer{flex:none; padding:10px 15px 12px; border-top:1px solid var(--line); font-size:10.5px; color:var(--muted); line-height:1.55;}
+  #legend footer .zl{margin-bottom:6px; line-height:1.9;}
+  #legend footer .zl i{display:inline-block; width:10px; height:10px; border-radius:3px; margin:0 5px 0 0; vertical-align:-1px;}
+  #legend footer .zl span{margin-right:9px; white-space:nowrap;}
   #legend footer b{color:#c8dcd0; font-weight:650;}
   #legendToggle{position:absolute; top:76px; right:14px; z-index:8; appearance:none; border:1px solid var(--line);
        background:var(--panel); color:var(--txt); font:inherit; font-size:12px; font-weight:650;
@@ -273,7 +276,9 @@
       <h2>สารบัญพื้นที่ · กดเพื่อพาไปดู</h2>
     </header>
     <div id="legendList"></div>
-    <footer><b>เกณฑ์ GMP:</b> แยกสายทางวัตถุดิบ–คน แบ่งโซนสถานะชัดเจน (กักกัน/ปล่อยผ่าน/ไม่ผ่าน) และคุมทิศทางไหลของงานจากรับเข้า → ผลิต → บรรจุ → คลังจ่ายออก</footer>
+    <footer>
+    <div class="zl"><span><i style="background:#cfc38e"></i>ขาเข้า/วัตถุดิบ</span><span><i style="background:#b9c7ba"></i>ไลน์ผลิต</span><span><i style="background:#9cc7be"></i>สายยาน้ำ</span><span><i style="background:#a7c2d6"></i>โซนบรรจุ–คลังออก</span></div>
+    <b>เกณฑ์ GMP:</b> แยกสายทางวัตถุดิบ–คน แบ่งโซนสถานะชัดเจน (กักกัน/ปล่อยผ่าน/ไม่ผ่าน) และคุมทิศทางไหลของงานจากรับเข้า → ผลิต → บรรจุ → คลังจ่ายออก</footer>
   </aside>
   <button id="legendToggle">
     <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2.5 4h11M2.5 8h11M2.5 12h7"/></svg>
