@@ -54,7 +54,7 @@
 
   /* ---------- top bar ---------- */
   #topbar{position:absolute; top:0; left:0; right:0; z-index:10; display:flex; align-items:flex-start;
-       justify-content:space-between; gap:10px; padding:12px 14px; pointer-events:none; flex-wrap:wrap;}
+       justify-content:flex-end; gap:10px; padding:12px 14px; pointer-events:none; flex-wrap:wrap;}
   .tb-group{pointer-events:auto; display:flex; align-items:center; gap:8px;}
   #brand{background:var(--panel); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
        border:1px solid var(--line); border-radius:var(--r); padding:10px 14px; display:flex; gap:11px; align-items:center;
@@ -142,7 +142,7 @@
   #mapwrap.show{display:flex;}
   #minimap{border-radius:12px; border:1px solid var(--line); box-shadow:0 10px 30px rgba(4,10,7,.5); cursor:pointer;
        background:var(--panel);}
-  #compass{position:absolute; left:14px; top:76px; z-index:7; width:44px; height:44px; border-radius:50%;
+  #compass{position:absolute; left:14px; top:14px; z-index:7; width:44px; height:44px; border-radius:50%;
        background:var(--panel-soft); backdrop-filter:blur(10px); border:1px solid var(--line); display:flex; align-items:center;
        justify-content:center; pointer-events:none;}
   #compass .rose{width:30px; height:30px; transition:none;}
@@ -162,7 +162,7 @@
        padding:30px; background:#0d1411; color:#c8dcd0; font-size:14px; line-height:1.7;}
 
   /* ---------- flow panel ---------- */
-  #flowPanel{position:absolute; top:128px; left:14px; z-index:8; width:206px;
+  #flowPanel{position:absolute; top:68px; left:14px; z-index:8; width:206px;
        background:var(--panel); backdrop-filter:blur(14px); border:1px solid var(--line); border-radius:14px;
        box-shadow:0 10px 30px rgba(4,10,7,.45); padding:10px 10px 8px; transition:opacity .2s, transform .2s;}
   #flowPanel.hidden{opacity:0; transform:translateY(-8px); pointer-events:none;}
@@ -230,15 +230,6 @@
   <div id="labels" aria-hidden="true"></div>
 
   <header id="topbar">
-    <div class="tb-group">
-      <div id="brand">
-        <div class="mark">GMP</div>
-        <div>
-          <h1>อาคารผลิตยาสมุนไพร — ผังจำลอง 3 มิติ</h1>
-          <div class="sub">Herbal Medicine Plant · 28 × 12 m · GMP Layout</div>
-        </div>
-      </div>
-    </div>
     <div class="tb-group" style="flex-wrap:wrap; justify-content:flex-end;">
       <nav id="views" aria-label="มุมมอง">
         <button class="vbtn" data-mode="top" title="มุมมองแปลน (Top view)">
