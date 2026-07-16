@@ -227,11 +227,11 @@ var ROOMS = [
   desc:'วัตถุดิบเข้าจากประตูฝั่งตะวันตก ผ่านแอร์ล็อกชั้นที่ 1 ก่อนเข้าสู่ไลน์ผลิต'},
  {id:'alin2', th:'A/L ชั้นที่ 2', en:'Airlock · Stage 2', x0:2.0,y0:4.8,x1:3.2,y1:7.2, floor:'epoxy', grp:'store',
   desc:'แอร์ล็อกชั้นที่สองของทางเข้าวัตถุดิบ ประตูเปิดทีละบานกันการปนเปื้อนเข้าไลน์ผลิต'},
- {id:'hall', th:'ไลน์ผลิต (โถงกลาง)', en:'Production Line Corridor', x0:3.2,y0:4.8,x1:22.6,y1:7.2, floor:'epoxyHall', grp:'prod',
+ {id:'hall', th:'ไลน์ผลิต (โถงกลาง)', en:'Production Line Corridor', x0:3.2,y0:4.8,x1:21.6,y1:7.2, floor:'epoxyHall', grp:'prod',
   desc:'โถงไลน์ผลิตกว้าง 2.4 ม. พาดกลางอาคาร ทุกห้องเปิดเข้าหาโถงนี้ ปลายทางทิศตะวันออกผ่าน A/L สู่คลังสำเร็จรูป'},
- {id:'alE', th:'A/L ออกคลังสำเร็จรูป', en:'Airlock · To FG Store', x0:22.6,y0:4.8,x1:23.7,y1:7.2, floor:'epoxy', grp:'prod',
+ {id:'alE', th:'A/L ออกคลังสำเร็จรูป', en:'Airlock · To FG Store', x0:21.6,y0:4.8,x1:22.6,y1:7.2, floor:'epoxy', grp:'prod',
   desc:'แอร์ล็อกท้ายไลน์ผลิต คั่นโซนผลิตกับโถงคลังสำเร็จรูปฝั่งตะวันออก'},
- {id:'hallE', th:'โถงคลัง / จ่ายสินค้า', en:'FG Corridor · Dispatch', x0:23.7,y0:4.8,x1:28,y1:7.2, floor:'epoxyHall', grp:'store',
+ {id:'hallE', th:'โถงคลัง / จ่ายสินค้า', en:'FG Corridor · Dispatch', x0:22.6,y0:4.8,x1:28,y1:7.2, floor:'epoxyHall', grp:'store',
   desc:'โถงฝั่งคลังสำเร็จรูป มีประตูจ่ายสินค้าออกทางทิศตะวันออก — คนละฝั่งกับทางเข้าวัตถุดิบ'},
  // ---- north row (y 7.2-12, west -> east)
  {id:'ro', th:'ห้องระบบน้ำ RO', en:'RO Water Plant', x0:0,y0:7.2,x1:2.2,y1:12, floor:'epoxy', grp:'util',
@@ -276,7 +276,7 @@ var ROOMS = [
  {id:'bottlefill', th:'ห้องบรรจุใส่ขวด / กระปุก', en:'Bottle / Jar Filling', x0:18.6,y0:0,x1:21.5,y1:4.8, floor:'epoxy', grp:'prod',
   desc:'สายบรรจุแคปซูล/เม็ดลงขวด-กระปุก พร้อมเครื่องปิดฝาและสายลำเลียง'},
  {id:'labelroom', th:'ห้องติดฉลาก', en:'Labelling Room', x0:21.5,y0:0,x1:24.0,y1:4.8, floor:'epoxy', grp:'prod',
-  desc:'ติดฉลาก ตรวจนับ และบรรจุกล่อง ก่อนส่งเข้าคลังสำเร็จรูปผ่าน A/L ท้ายไลน์'},
+  desc:'อยู่ฝั่งโถงคลัง (หลัง A/L ท้ายไลน์) — ติดฉลาก ตรวจนับ บรรจุกล่อง แล้วส่งเข้าคลังสำเร็จรูป'},
  {id:'fg', th:'ห้องเก็บผลิตภัณฑ์สำเร็จรูป', en:'Finished Goods Store', x0:24.0,y0:0,x1:28,y1:4.8, floor:'concrete', grp:'store',
   desc:'คลังสำเร็จรูปฝั่งตะวันออก รับสินค้าผ่าน A/L ท้ายไลน์ — คนละฝั่งกับทางเข้าวัตถุดิบ จ่ายออกประตูตะวันออก'},
  {id:'lblstore', th:'ห้องเก็บฉลากบรรจุภัณฑ์', en:'Label Store', x0:21.6,y0:10.3,x1:24.0,y1:12, floor:'vinyl', grp:'store',
@@ -413,8 +413,8 @@ wallRun(28,0,28,12,{t:.22, mat:MAT.wallExt, gaps:[{c:6.0,w:1.6,type:'double',ss:
 // ---- middle band: entry airlocks + line + exit airlock (y 4.8-7.2)
 wallRun(2.0,4.8,2.0,7.2, {gaps:[{c:6.0,w:1.5,type:'double',ss:true,swing:-1,openDeg:70}]}); // A/L1 -> A/L2
 wallRun(3.2,4.8,3.2,7.2, {gaps:[{c:6.0,w:1.5,type:'double',ss:true,swing:1,openDeg:70}]});  // A/L2 -> line
-wallRun(22.6,4.8,22.6,7.2,{gaps:[{c:6.0,w:1.4,type:'double',ss:true,swing:-1,openDeg:70}]}); // line -> A/L east
-wallRun(23.7,4.8,23.7,7.2,{gaps:[{c:6.0,w:1.4,type:'double',ss:true,swing:1,openDeg:70}]});  // A/L east -> FG corridor
+wallRun(21.6,4.8,21.6,7.2,{gaps:[{c:6.0,w:1.4,type:'double',ss:true,swing:-1,openDeg:70}]}); // line -> A/L (west line of pkmat/labelling)
+wallRun(22.6,4.8,22.6,7.2,{gaps:[{c:6.0,w:1.4,type:'double',ss:true,swing:1,openDeg:70}]});  // A/L -> FG corridor
 
 // ---- north row dividers (y 7.2-12)
 wallRun(2.2,7.2,2.2,12,{});   // RO | raw material store
@@ -440,7 +440,7 @@ wallRun(0,7.2,28,7.2,{gaps:[
   {c:14.65,w:.95,type:'door',swing:-1},      // clean equipment
   {c:18.0,w:.9,type:'door',swing:-1},        // liquid A/L (outer)
   {c:20.9,w:.7,type:'window'},
-  {c:22.1,w:.9,type:'door',swing:-1},        // packaging materials
+  {c:23.3,w:.9,type:'door',swing:-1},        // packaging materials (FG-corridor side)
   {c:25.05,w:.9,type:'door',swing:-1},       // stability
   {c:27.0,w:.9,type:'door',swing:-1}]});     // change room north
 // y=4.8 run — south rooms onto the line
@@ -452,7 +452,7 @@ wallRun(0,4.8,28,4.8,{gaps:[
   {c:14.9,w:.9,type:'door',swing:-1},        // IPC
   {c:17.3,w:1.0,type:'door',swing:-1},       // blister
   {c:19.3,w:1.0,type:'door',swing:1},        // bottle filling (swings into corridor)
-  {c:22.0,w:.95,type:'door',swing:-1},       // labelling
+  {c:23.2,w:.95,type:'door',swing:-1},       // labelling (FG-corridor side)
   {c:26.0,w:1.1,type:'door',swing:1}]});     // FG store (from FG corridor)
 // ---- south row dividers (y 0-4.8)
 wallRun(2.6,0,2.6,4.8, {gaps:[{c:2.4,w:.9,type:'door',swing:1}]});  // staff -> gowning
@@ -514,10 +514,10 @@ buildDashes();
 // hall walkway edge lines (solid yellow)
 (function(){
   [4.98, 7.02].forEach(function(y){
-    var st=box(19.2,.006,.07, MAT.yellowPnt, false, true);
-    st.position.set(WX(12.9), .03, WZ(y)); world.add(st);       // production line corridor
-    var st2=box(4.1,.006,.07, MAT.yellowPnt, false, true);
-    st2.position.set(WX(25.8), .03, WZ(y)); world.add(st2);     // FG corridor
+    var st=box(18.1,.006,.07, MAT.yellowPnt, false, true);
+    st.position.set(WX(12.4), .03, WZ(y)); world.add(st);       // production line corridor
+    var st2=box(5.1,.006,.07, MAT.yellowPnt, false, true);
+    st2.position.set(WX(25.3), .03, WZ(y)); world.add(st2);     // FG corridor
   });
   // hazard strips at material entry + dispatch
   var hz=new THREE.Mesh(new THREE.BoxGeometry(1.1,.006,1.9), MAT.hazard);

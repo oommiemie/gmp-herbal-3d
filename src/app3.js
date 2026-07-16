@@ -19,7 +19,7 @@ function addLabel(px,py,h,text,no,cls,modes){
   LABELS.push(L); return L;
 }
 var LBL_AT = {
-  alin:[1.0,6.05], alin2:[2.6,6.55], hall:[12.9,6.0], alE:[23.15,6.05], hallE:[25.9,6.0],
+  alin:[1.0,6.05], alin2:[2.6,6.55], hall:[12.4,6.0], alE:[22.1,6.05], hallE:[25.9,6.0],
   ro:[1.1,9.9], liqAL:[18.0,7.85], staff:[1.2,1.6], fg:[26.2,3.4]
 };
 ROOMS.forEach(function(r){

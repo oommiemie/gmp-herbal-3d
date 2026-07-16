@@ -459,9 +459,9 @@ place(bBench,18.85,9.0,90,[1.6,.6,.9]); solid(18.62,8.2,19.1,9.8);
 place(bDrum,21.35,7.7,0,[MAT.drumBlue]); place(bTrolley,20.4,8.4,0);
 
 // -- Packaging materials store -----------------------------------------------------
-place(bRack,23.42,9.0,90,[1.9]); solid(22.92,8.05,23.92,9.95);
-place(bPalletLoad,21.95,9.8,0); cluster(poolBox,21.95,9.8,.17,3,.9,.7); solid(21.65,9.35,22.5,10.2);
-place(bDrum,22.85,7.55,0,[MAT.drumWhite,.24,.8]); place(bPalletTruck,22.2,7.7,15);
+place(bRack,22.15,9.0,90,[1.9]); solid(21.65,8.05,22.65,9.95);
+place(bPalletLoad,23.45,9.75,0); cluster(poolBox,23.45,9.75,.17,3,.9,.7); solid(22.95,9.3,23.95,10.2);
+place(bDrum,23.4,7.6,0,[MAT.drumWhite,.24,.8]); place(bPalletTruck,23.0,7.85,15);
 place(bCabinet,22.2,11.62,0,[.62,1.9,.5]); solid(21.88,11.36,22.52,11.9);   // label store annex
 place(bCabinet,23.05,11.62,0,[.62,1.9,.5]); solid(22.73,11.36,23.37,11.9);
 cluster(poolBox2,23.68,10.8,0,2,.35,.5);
@@ -544,11 +544,11 @@ place(bPalletLoad,21.05,3.9,0,['wrap']); solid(20.5,3.45,21.45,4.35);
 place(bTrolley,19.0,0.6,0);
 
 // -- Labelling room ---------------------------------------------------------------------------------------
-place(bLabeler,23.1,4.05,0); solid(22.7,3.7,23.5,4.4);
+place(bLabeler,22.3,4.05,0); solid(21.9,3.7,22.7,4.4);
 place(bBench,21.75,2.5,90,[2.0,.6,.88]); solid(21.5,1.5,22.0,3.5);
 cluster(poolBox,21.75,2.5,.9,4,1.6,.5,.22);
-cluster(poolBox2,23.5,2.2,0,3,.45,.6); solid(23.2,1.85,23.8,2.55);
-place(bChair,22.6,2.5,90); place(bTrolley,23.35,1.1,0);
+cluster(poolBox2,22.5,2.2,0,3,.45,.6); solid(22.2,1.85,22.8,2.55);
+place(bChair,23.75,2.1,90); place(bTrolley,23.35,1.1,0);
 
 // -- FG store + label store ----------------------------------------------------------------------------------
 place(bRack,27.45,3.2,90,[2.2]); solid(26.95,2.1,27.95,4.3);
@@ -560,7 +560,7 @@ cluster(poolBox,25.3,0.62,1.03,4,1.9,.8); cluster(poolBox2,25.3,0.62,.19,3,1.9,.
 
 // -- Airlocks & corridors ------------------------------------------------------------------------------------
 place(bTrolley,1.0,6.0,90);
-[[0.16,90],[1.92,-90],[2.08,90],[3.12,-90],[22.68,90],[23.62,-90]].forEach(function(p){
+[[0.16,90],[1.92,-90],[2.08,90],[3.12,-90],[21.68,90],[22.52,-90]].forEach(function(p){
   var ind=place(bIndicator,p[0],6.0,p[1]); ind.position.y=2.5;
 });
 place(bTrolley,5.2,6.55,0); place(bTrolley,15.2,5.4,90);
