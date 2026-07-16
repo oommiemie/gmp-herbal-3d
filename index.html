@@ -254,6 +254,7 @@
         <button class="tgl" id="tglSpin"><span class="dot"></span><span>หมุนอัตโนมัติ</span></button>
         <button class="tgl" id="tglFlow"><span class="dot"></span><span>การไหล</span></button>
         <button class="tgl" id="tglMeas"><span class="dot"></span><span>วัดระยะ</span></button>
+        <button class="tgl" id="tglQual" title="ระดับกราฟิก — กดเพื่อสลับ อัตโนมัติ/สูง/กลาง/ต่ำ"><span class="dot"></span><span id="qualTxt">กราฟิกอัตโนมัติ</span></button>
       </div>
     </div>
   </header>
@@ -5248,13 +5249,42 @@ var composer=null, saoPass=null, fxaaPass=null;
 function sizeComposer(){
   if(!composer) return;
   var w=window.innerWidth, h=window.innerHeight, pr=renderer.getPixelRatio();
+  composer.setPixelRatio(pr);
   composer.setSize(w,h);
   if(fxaaPass) fxaaPass.material.uniforms['resolution'].value.set(1/(w*pr),1/(h*pr));
 }
 function renderFrame(){
-  if(composer && activeCam===camP) composer.render();
+  if(composer && activeCam===camP && QUAL.level===3) composer.render();
   else renderer.render(scene, activeCam);
 }
+
+// ---------------- adaptive graphics quality ----------------
+var QUAL={mode:'auto', level:(!isTouch && window.innerWidth>1100)?3:2, acc:0, n:0, cool:0, up:0};
+var qualBtn=document.getElementById('tglQual'), qualTxt=document.getElementById('qualTxt');
+var QUAL_NAMES={3:'สูง',2:'กลาง',1:'ต่ำ'};
+function qualLabel(){
+  if(qualTxt) qualTxt.textContent = QUAL.mode==='auto'
+    ? 'กราฟิกอัตโนมัติ ('+QUAL_NAMES[QUAL.level]+')' : 'กราฟิก'+QUAL_NAMES[QUAL.level];
+  if(qualBtn) qualBtn.classList.toggle('on', QUAL.mode==='auto');
+}
+function applyQuality(l){
+  QUAL.level=clamp(l,1,3);
+  renderer.setPixelRatio(QUAL.level===3 ? Math.min(window.devicePixelRatio||1,2)
+                       : QUAL.level===2 ? Math.min(window.devicePixelRatio||1,1.5) : 1);
+  var sz=QUAL.level===3 ? (window.innerWidth>900?4096:2048) : QUAL.level===2 ? 2048 : 1024;
+  if(sun.shadow.mapSize.x!==sz){
+    sun.shadow.mapSize.set(sz,sz);
+    if(sun.shadow.map){ sun.shadow.map.dispose(); sun.shadow.map=null; }
+  }
+  onResize();
+  qualLabel();
+}
+if(qualBtn) qualBtn.addEventListener('click', function(){
+  if(QUAL.mode==='auto'){ QUAL.mode='manual'; applyQuality(3); }
+  else if(QUAL.level===3) applyQuality(2);
+  else if(QUAL.level===2) applyQuality(1);
+  else { QUAL.mode='auto'; applyQuality((!isTouch && window.innerWidth>1100)?3:2); }
+});
 
 function orthoFrustum(mode){
   var a=window.innerWidth/window.innerHeight;
@@ -5632,7 +5662,7 @@ function frame(){
     camP.rotation.set(player.pitch, player.yaw, 0);
     drawMap();
   } else if(MODE==='orbit'){ ctlP.update(); }
-  else { ctlO.update(); }
+  else if(MODE==='top'||MODE==='iso'){ ctlO.update(); }
 
   // labels
   var wdt=window.innerWidth, hgt=window.innerHeight, v=new THREE.Vector3();
@@ -5651,6 +5681,19 @@ function frame(){
     L.el.style.opacity=op;
     L.el.style.transform='translate(-50%,-114%) translate('+(v.x+1)/2*wdt+'px,'+(1-v.y)/2*hgt+'px)';
   }
+  // adaptive quality: downshift when the frame rate drops, upshift when it recovers
+  QUAL.acc+=dt; QUAL.n++;
+  if(QUAL.n>=50){
+    var fpsAvg=QUAL.n/QUAL.acc; QUAL.acc=0; QUAL.n=0;
+    if(QUAL.mode==='auto'){
+      if(fpsAvg<26 && QUAL.level>1 && now>QUAL.cool){
+        applyQuality(QUAL.level-1); QUAL.cool=now+4000; QUAL.up=now+16000;
+      } else if(fpsAvg>54 && QUAL.level<3 && now>QUAL.up){
+        applyQuality(QUAL.level+1); QUAL.up=now+16000; QUAL.cool=now+4000;
+      }
+    }
+  }
+
   // swing doors: open when the walker approaches, else stay closed
   for(var di=0;di<DOORS.length;di++){
     var D=DOORS[di], tgt=0;
@@ -5683,6 +5726,7 @@ window.addEventListener('resize', onResize);
 // ---------------- boot ----------------
 if(renderer){
   onResize();
+  applyQuality(QUAL.level);
   var initMode=(location.hash||'').replace('#','').split(',')[0];
   if(['top','iso','orbit','fp'].indexOf(initMode)<0) initMode='orbit';
   setMode(initMode,'keepFade');
