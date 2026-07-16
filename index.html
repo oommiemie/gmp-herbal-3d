@@ -74,7 +74,7 @@
   .vbtn:hover{color:var(--txt); background:rgba(255,255,255,.05);}
   .vbtn.on{background:var(--acc-deep); color:#dcffe9;}
   .vbtn:focus-visible,.tgl:focus-visible,#legendToggle:focus-visible,button:focus-visible{outline:2px solid var(--acc); outline-offset:2px;}
-  #opts{display:flex; gap:6px;}
+  #opts{position:absolute; top:12px; right:14px; display:flex; gap:6px; pointer-events:auto;}
   .tgl{appearance:none; border:1px solid var(--line); background:var(--panel-soft); backdrop-filter:blur(12px);
        color:var(--muted); font:inherit; font-size:12px; font-weight:600; padding:8px 12px; border-radius:999px; cursor:pointer;
        display:flex; align-items:center; gap:7px; transition:all .15s;}
@@ -212,6 +212,7 @@
     #tourbar p{display:none;}
     #brand h1{font-size:13px;} #brand .sub{font-size:9px;} #brand .mark{width:32px; height:32px;}
     #topbar{padding:8px;} .vbtn{padding:7px 9px;} .vbtn svg{width:17px; height:17px;}
+    #opts{top:58px; right:10px;}
     #legend{top:auto; height:46vh; bottom:0; right:0; left:0; width:auto; border-radius:18px 18px 0 0;}
     #legend.hidden{transform:translateY(105%);}
     #legendToggle{top:auto; bottom:16px; right:14px;}
