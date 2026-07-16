@@ -54,7 +54,7 @@
 
   /* ---------- top bar ---------- */
   #topbar{position:absolute; top:0; left:0; right:0; z-index:10; display:flex; align-items:flex-start;
-       justify-content:flex-end; gap:10px; padding:12px 14px; pointer-events:none; flex-wrap:wrap;}
+       justify-content:center; gap:10px; padding:12px 14px; pointer-events:none; flex-wrap:wrap;}
   .tb-group{pointer-events:auto; display:flex; align-items:center; gap:8px;}
   #brand{background:var(--panel); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
        border:1px solid var(--line); border-radius:var(--r); padding:10px 14px; display:flex; gap:11px; align-items:center;
@@ -66,10 +66,10 @@
   #brand .sub{margin-top:2px; font-size:10.5px; color:var(--muted); letter-spacing:.14em; text-transform:uppercase;
        font-variant-numeric:tabular-nums;}
   #views{background:var(--panel); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-       border:1px solid var(--line); border-radius:var(--r); padding:4px; display:flex; gap:3px;
+       border:1px solid var(--line); border-radius:999px; padding:5px; display:flex; gap:3px;
        box-shadow:0 8px 28px rgba(4,10,7,.45);}
   .vbtn{appearance:none; border:none; background:transparent; color:var(--muted); font:inherit; font-size:12.5px; font-weight:650;
-       padding:7px 12px; border-radius:10px; cursor:pointer; display:flex; align-items:center; gap:7px; transition:background .15s,color .15s;}
+       padding:7px 14px; border-radius:999px; cursor:pointer; display:flex; align-items:center; gap:7px; transition:background .15s,color .15s;}
   .vbtn svg{width:15px; height:15px; flex:none;}
   .vbtn:hover{color:var(--txt); background:rgba(255,255,255,.05);}
   .vbtn.on{background:var(--acc-deep); color:#dcffe9;}
@@ -200,7 +200,7 @@
   .lbl-meas{background:rgba(14,30,22,.92); color:#b7f4d4; border:1px solid rgba(63,174,122,.6);
        padding:2px 8px 3px; border-radius:8px; font-size:11.5px; font-weight:700; font-variant-numeric:tabular-nums;}
   #c.measuring{cursor:crosshair;}
-  .vbtn.sep{border-left:1px solid var(--line); border-radius:0 10px 10px 0; margin-left:2px; padding-left:13px;}
+  .vbtn.sep{border-left:1px solid var(--line); border-radius:0 999px 999px 0; margin-left:2px; padding-left:15px;}
   .tgl svg{width:13px; height:13px; flex:none;}
 
   @media (max-width:1500px){ #opts .tgl span{display:none;} .tgl{padding:8px 10px;} }
