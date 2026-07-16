@@ -362,10 +362,12 @@ function exportPNG(){
     showToast('บันทึกภาพ PNG แล้ว ✓');
   }catch(err){ showToast('บันทึกภาพไม่สำเร็จ'); }
 }
-document.getElementById('btnShot').addEventListener('click', exportPNG);
+var btnShotEl=document.getElementById('btnShot');
+if(btnShotEl) btnShotEl.addEventListener('click', exportPNG);
 
 var btnFS=document.getElementById('btnFS');
 (function(){
+  if(!btnFS) return;
   var de=document.documentElement;
   if(!(de.requestFullscreen||de.webkitRequestFullscreen)){ btnFS.style.display='none'; return; }
   btnFS.addEventListener('click', function(){
