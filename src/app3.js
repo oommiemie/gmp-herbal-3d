@@ -105,7 +105,7 @@ function renderFrame(){
 }
 
 // ---------------- adaptive graphics quality ----------------
-var QUAL={mode:'auto', level:(!isTouch && window.innerWidth>1100)?3:2, acc:0, n:0, cool:0, up:0};
+var QUAL={mode:'auto', level:2, acc:0, n:0, cool:0, up:0, no3:isTouch};
 var qualBtn=document.getElementById('tglQual'), qualTxt=document.getElementById('qualTxt');
 var QUAL_NAMES={3:'สูง',2:'กลาง',1:'ต่ำ'};
 function qualLabel(){
@@ -115,13 +115,15 @@ function qualLabel(){
 }
 function applyQuality(l){
   QUAL.level=clamp(l,1,3);
-  renderer.setPixelRatio(QUAL.level===3 ? Math.min(window.devicePixelRatio||1,2)
-                       : QUAL.level===2 ? Math.min(window.devicePixelRatio||1,1.5) : 1);
-  var sz=QUAL.level===3 ? (window.innerWidth>900?4096:2048) : QUAL.level===2 ? 2048 : 1024;
+  renderer.setPixelRatio(QUAL.level===3 ? Math.min(window.devicePixelRatio||1,1.75)
+                       : QUAL.level===2 ? Math.min(window.devicePixelRatio||1,1.25) : 1);
+  var sz=QUAL.level===3 ? 2048 : QUAL.level===2 ? 2048 : 1024;
   if(sun.shadow.mapSize.x!==sz){
     sun.shadow.mapSize.set(sz,sz);
     if(sun.shadow.map){ sun.shadow.map.dispose(); sun.shadow.map=null; }
   }
+  sun.castShadow=(QUAL.level>1);
+  renderer.shadowMap.needsUpdate=true;
   onResize();
   qualLabel();
 }
@@ -483,7 +485,7 @@ function stepCompass(){
 }
 
 // ---------------- render loop ----------------
-var lastT=performance.now();
+var lastT=performance.now(), lblTick=0;
 function frame(){
   requestAnimationFrame(frame);
   var now=performance.now(), dt=Math.min(.05,(now-lastT)/1000); lastT=now;
@@ -510,9 +512,10 @@ function frame(){
   } else if(MODE==='orbit'){ ctlP.update(); }
   else if(MODE==='top'||MODE==='iso'){ ctlO.update(); }
 
-  // labels
+  // labels (throttled to every 2nd frame — DOM writes are expensive)
+  lblTick^=1;
   var wdt=window.innerWidth, hgt=window.innerHeight, v=new THREE.Vector3();
-  for(var i=0;i<LABELS.length;i++){
+  for(var i=0; lblTick===0 && i<LABELS.length;i++){
     var L=LABELS[i];
     if(!L.v){ L.el.style.display='none'; continue; }
     v.copy(L.p).project(activeCam);
@@ -529,13 +532,14 @@ function frame(){
   }
   // adaptive quality: downshift when the frame rate drops, upshift when it recovers
   QUAL.acc+=dt; QUAL.n++;
-  if(QUAL.n>=50){
+  if(QUAL.n>=30){
     var fpsAvg=QUAL.n/QUAL.acc; QUAL.acc=0; QUAL.n=0;
     if(QUAL.mode==='auto'){
-      if(fpsAvg<26 && QUAL.level>1 && now>QUAL.cool){
-        applyQuality(QUAL.level-1); QUAL.cool=now+4000; QUAL.up=now+16000;
-      } else if(fpsAvg>54 && QUAL.level<3 && now>QUAL.up){
-        applyQuality(QUAL.level+1); QUAL.up=now+16000; QUAL.cool=now+4000;
+      if(fpsAvg<24 && QUAL.level>1 && now>QUAL.cool){
+        if(QUAL.level===3) QUAL.no3=true;           // never bounce back to High
+        applyQuality(QUAL.level-1); QUAL.cool=now+3000; QUAL.up=now+12000;
+      } else if(fpsAvg>55 && QUAL.level<(QUAL.no3?2:3) && now>QUAL.up){
+        applyQuality(QUAL.level+1); QUAL.up=now+12000; QUAL.cool=now+3000;
       }
     }
   }
