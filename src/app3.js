@@ -268,6 +268,8 @@ function setMode(m, instant){
       camO.position.set(-1.6,80,-0.35+0.045);
       ctlO.minPolarAngle=0; ctlO.maxPolarAngle=0;
       ctlO.enableRotate=false; ctlO.enabled=true;
+      ctlO.mouseButtons={LEFT:THREE.MOUSE.PAN, MIDDLE:THREE.MOUSE.DOLLY, RIGHT:THREE.MOUSE.PAN};
+      ctlO.touches={ONE:THREE.TOUCH.PAN, TWO:THREE.TOUCH.DOLLY_PAN};
       camO.updateProjectionMatrix(); ctlO.update();
     } else if(m==='iso'){
       activeCam=camO; orthoFrustum('iso');
@@ -275,6 +277,8 @@ function setMode(m, instant){
       camO.position.set(0,.4,0).add(new THREE.Vector3().setFromSphericalCoords(70, ISO_PHI, .62));
       ctlO.minPolarAngle=ISO_PHI; ctlO.maxPolarAngle=ISO_PHI;
       ctlO.enableRotate=true; ctlO.enabled=true;
+      ctlO.mouseButtons={LEFT:THREE.MOUSE.ROTATE, MIDDLE:THREE.MOUSE.DOLLY, RIGHT:THREE.MOUSE.PAN};
+      ctlO.touches={ONE:THREE.TOUCH.ROTATE, TWO:THREE.TOUCH.DOLLY_PAN};
       ctlO.autoRotate=spinOn;
       camO.updateProjectionMatrix(); ctlO.update();
     } else if(m==='orbit'){
