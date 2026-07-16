@@ -20,7 +20,7 @@ function addLabel(px,py,h,text,no,cls,modes){
 }
 var LBL_AT = {
   alin:[1.0,6.05], alin2:[2.6,6.55], hall:[12.9,6.0], alE:[23.15,6.05], hallE:[25.9,6.0],
-  ro:[1.1,9.9], liqAL:[16.9,7.85], staff:[1.2,1.6], fg:[26.2,3.4], lblstore:[26.0,0.9]
+  ro:[1.1,9.9], liqAL:[18.0,7.85], staff:[1.2,1.6], fg:[26.2,3.4]
 };
 ROOMS.forEach(function(r){
   var p=LBL_AT[r.id]||[(r.x0+r.x1)/2,(r.y0+r.y1)/2];
@@ -362,10 +362,10 @@ updateLabelVisibility();
 
 // ---------------- legend / directory ----------------
 var GROUPS=[
- {t:'ขาเข้าและคลัง · Incoming', ids:['alin','alin2','rm','zquar','pkmat']},
+ {t:'ขาเข้าและคลัง · Incoming', ids:['alin','alin2','rm','zquar','pkmat','lblstore']},
  {t:'ไลน์ผลิต · Production Line', ids:['hall','weigh','mixer','capsule','ipc','blister','bottlefill']},
  {t:'สายยาน้ำ · Liquid Line', ids:['liqmix','liqAL','liqfill']},
- {t:'ฝั่งจ่ายออก · Outgoing', ids:['alE','hallE','labelroom','fg','zfgq','lblstore']},
+ {t:'ฝั่งจ่ายออก · Outgoing', ids:['alE','hallE','labelroom','fg','zfgq']},
  {t:'สนับสนุน · Support & Utility', ids:['ro','sample','washN','oven','cleanstore','stab','staff','chgS','chgN']}
 ];
 var listEl=document.getElementById('legendList');

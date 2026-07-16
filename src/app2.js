@@ -450,7 +450,6 @@ place(bTank,16.25,11.3,0,[.45,1.3]); solid(15.85,10.85,16.7,11.75);
 place(bConveyor,17.55,10.6,90,[2.2]); solid(17.3,9.5,17.8,11.7);
 place(bFiller,17.55,11.1,90);
 for(var lb=0;lb<5;lb++) poolBottle.add(17.55, 9.75+lb*.34, .88, .1,.22,.1, 0);
-place(bBench,18.35,9.3,90,[1.6,.5,.9]); solid(18.12,8.5,18.6,10.1);
 
 // -- Liquid mixing ----------------------------------------------------------------
 place(bTank,19.3,11.2,0,[.6,1.5]); solid(18.65,10.5,19.95,11.85);
@@ -460,11 +459,12 @@ place(bBench,18.85,9.0,90,[1.6,.6,.9]); solid(18.62,8.2,19.1,9.8);
 place(bDrum,21.35,7.7,0,[MAT.drumBlue]); place(bTrolley,20.4,8.4,0);
 
 // -- Packaging materials store -----------------------------------------------------
-place(bRack,22.8,11.35,0,[2.2]); solid(21.7,10.85,23.9,11.9);
-cluster(poolBox,22.8,11.35,1.03,4,1.9,.8); cluster(poolBox2,22.8,11.35,.19,3,1.9,.8);
-place(bPalletLoad,23.35,9.5,0); cluster(poolBox,23.35,9.5,.17,3,.9,.7); solid(22.8,9.05,23.9,9.95);
-cluster(poolBox,21.95,10.4,0,3,.5,.5); solid(21.65,10.05,22.4,10.75);
-place(bPalletTruck,23.3,7.9,15);
+place(bRack,23.42,9.0,90,[1.9]); solid(22.92,8.05,23.92,9.95);
+place(bPalletLoad,21.95,9.8,0); cluster(poolBox,21.95,9.8,.17,3,.9,.7); solid(21.65,9.35,22.5,10.2);
+place(bDrum,22.85,7.55,0,[MAT.drumWhite,.24,.8]); place(bPalletTruck,22.2,7.7,15);
+place(bCabinet,22.2,11.62,0,[.62,1.9,.5]); solid(21.88,11.36,22.52,11.9);   // label store annex
+place(bCabinet,23.05,11.62,0,[.62,1.9,.5]); solid(22.73,11.36,23.37,11.9);
+cluster(poolBox2,23.68,10.8,0,2,.35,.5);
 
 // -- Stability samples --------------------------------------------------------------
 place(bShelfSS,24.28,10.0,90,[2.6,.5,4]); solid(24.05,8.7,24.53,11.3);
@@ -528,10 +528,11 @@ place(bMonitorSmall,14.1,3.0,90);
 place(bFloorScale,15.5,3.7,0);
 place(bStool,14.9,2.4,0); place(bStool,15.05,1.5,0);
 
-// -- Blister packing ----------------------------------------------------------------------------------
-place(bShrink,17.0,1.1,0); solid(16.25,0.75,17.75,1.45);
+// -- Tablet polishing ----------------------------------------------------------------------------------
+place(bTank,17.0,1.2,0,[.38,.9]); solid(16.55,0.75,17.45,1.65);   // polisher/deduster drum
 place(bBench,18.3,2.9,90,[1.8,.6,.9]); solid(18.05,2.0,18.55,3.8);
-cluster(poolBox,16.35,4.1,0,3,.5,.5); solid(16.1,3.75,16.75,4.45);
+place(bDrum,16.35,4.1,0,[MAT.drumWhite,.24,.8]); solid(16.08,3.83,16.62,4.37);
+place(bFloorScale,16.4,2.0,90);
 place(bChair,17.9,1.95,90);
 
 // -- Bottle / jar filling --------------------------------------------------------------------------------
@@ -554,9 +555,8 @@ place(bRack,27.45,3.2,90,[2.2]); solid(26.95,2.1,27.95,4.3);
 cluster(poolBox,27.45,3.2,1.03,3,.8,1.6); cluster(poolBox2,27.45,3.2,.19,2,.8,1.6);
 place(bPalletLoad,24.55,4.15,0,['wrap']); solid(24.05,3.7,25.1,4.6);
 place(bPalletLoad,24.55,3.0,0,['wrap']); solid(24.05,2.55,25.1,3.45);
-place(bCabinet,24.9,0.35,0,[.62,1.9,.5]); solid(24.58,0.1,25.22,0.62);
-place(bCabinet,25.8,0.35,0,[.62,1.9,.5]); solid(25.48,0.1,26.12,0.62);
-cluster(poolBox2,27.4,0.9,0,3,.4,.6);
+place(bRack,25.3,0.62,0,[2.2]); solid(24.2,0.12,26.4,1.15);
+cluster(poolBox,25.3,0.62,1.03,4,1.9,.8); cluster(poolBox2,25.3,0.62,.19,3,1.9,.8);
 
 // -- Airlocks & corridors ------------------------------------------------------------------------------------
 place(bTrolley,1.0,6.0,90);
@@ -673,7 +673,7 @@ var ceilGroup=new THREE.Group(); world.add(ceilGroup);
       fr.position.set(WX(px),WALL_H-.005,WZ(py)); fr.castShadow=false; ceilGroup.add(fr);
     }
   });
-  [[3.3,10.6],[5.5,10.6],[3.3,8.4],[5.5,8.4],[22.8,10.5],[22.8,8.5],[26.0,3.3]].forEach(function(p){
+  [[3.3,10.6],[5.5,10.6],[3.3,8.4],[5.5,8.4],[22.8,8.6],[26.0,3.3],[26.0,1.2]].forEach(function(p){
     var ring=new THREE.Mesh(new THREE.CylinderGeometry(.36,.36,.016,20), MAT.lampCase);
     ring.position.set(WX(p[0]),WALL_H-.035,WZ(p[1])); ring.castShadow=false; ceilGroup.add(ring);
     var glow=new THREE.Mesh(GEO.cyl, MAT.lamp); glow.scale.set(.6,.02,.6); glow.castShadow=false;

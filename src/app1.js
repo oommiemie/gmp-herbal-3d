@@ -246,14 +246,14 @@ var ROOMS = [
   desc:'ตู้อบลมร้อนสำหรับอบแห้งเครื่องมือ/ภาชนะหลังล้าง ก่อนส่งเก็บห้องอุปกรณ์สะอาด'},
  {id:'cleanstore', th:'ห้องเก็บอุปกรณ์ (สะอาด)', en:'Clean Equipment Store', x0:13.5,y0:7.2,x1:15.8,y1:12, floor:'vinyl', grp:'support',
   desc:'เก็บอุปกรณ์เครื่องมือที่ทำความสะอาดและอบแห้งแล้ว บนชั้นสแตนเลส คว่ำภาชนะกันฝุ่น'},
- {id:'liqAL', th:'A/L ห้องบรรจุยาน้ำ', en:'Airlock · Liquid Filling', x0:16.3,y0:7.2,x1:17.5,y1:8.4, floor:'epoxy', grp:'prod',
-  desc:'แอร์ล็อกเฉพาะของห้องบรรจุยาน้ำ ป้องกันการปนเปื้อนเข้าจุดบรรจุสัมผัสยาโดยตรง'},
+ {id:'liqAL', th:'A/L สายยาน้ำ (สองทาง)', en:'Airlock · Liquid Suite', x0:17.4,y0:7.2,x1:18.6,y1:8.4, floor:'epoxy', grp:'prod',
+  desc:'แอร์ล็อกร่วมของสายยาน้ำ — จากไลน์ผลิตเข้าได้สองทาง: ห้องบรรจุยาน้ำ และห้องผสมยาน้ำ ป้องกันการปนเปื้อนเข้าจุดสัมผัสยา'},
  {id:'liqfill', th:'ห้องบรรจุยาน้ำ', en:'Liquid Filling Room', x0:15.8,y0:7.2,x1:18.6,y1:12, floor:'epoxy', grp:'prod',
   desc:'บรรจุยาน้ำลงขวด — เข้าห้องได้ผ่านแอร์ล็อกของตัวเองเท่านั้น มีถังพักยาและสายบรรจุ'},
  {id:'liqmix', th:'ห้องผสมยาน้ำ', en:'Liquid Mixing Room', x0:18.6,y0:7.2,x1:21.6,y1:12, floor:'epoxy', grp:'prod',
-  desc:'ถังผสม/เตรียมยาน้ำ พร้อมแผงควบคุม ส่งยาที่ผสมแล้วเข้าห้องบรรจุยาน้ำ'},
- {id:'pkmat', th:'ห้องเก็บวัสดุบรรจุ', en:'Packaging Materials Store', x0:21.6,y0:7.2,x1:24.0,y1:12, floor:'concrete', grp:'store',
-  desc:'เก็บขวด ฝา กล่อง และวัสดุการบรรจุ แยกจากวัตถุดิบ เบิกเข้าไลน์ผลิตได้โดยตรง'},
+  desc:'ถังผสม/เตรียมยาน้ำ พร้อมแผงควบคุม — ไม่มีประตูออกไลน์โดยตรง เข้าออกผ่านแอร์ล็อกร่วมของสายยาน้ำเท่านั้น'},
+ {id:'pkmat', th:'ห้องเก็บวัสดุบรรจุ', en:'Packaging Materials Store', x0:21.6,y0:7.2,x1:24.0,y1:10.3, floor:'concrete', grp:'store',
+  desc:'เก็บขวด ฝา กล่อง และวัสดุการบรรจุ แยกจากวัตถุดิบ เบิกเข้าไลน์ผลิตได้โดยตรง — มีห้องเก็บฉลากบรรจุภัณฑ์เป็นห้องลูกอยู่ด้านใน'},
  {id:'stab', no:8, th:'ห้องเก็บ Stability', en:'Stability Samples', x0:24.0,y0:7.2,x1:26.1,y1:12, floor:'vinyl', grp:'support',
   desc:'เก็บตัวอย่างศึกษาความคงสภาพและตัวอย่างอ้างอิงแต่ละรุ่นผลิต ควบคุมสภาวะ'},
  {id:'chgN', th:'ห้องเปลี่ยนชุด (บน)', en:'Change Room · North', x0:26.1,y0:7.2,x1:28,y1:12, floor:'vinyl2', grp:'support',
@@ -268,19 +268,19 @@ var ROOMS = [
  {id:'mixer', no:5, th:'ห้องผสม (Mixer)', en:'Mixing Room', x0:8.2,y0:0,x1:11.0,y1:4.8, floor:'epoxy', grp:'prod',
   desc:'เครื่องผสมผงยา (Mixer) เตรียม bulk สำหรับสายบรรจุแคปซูล/แผง/ขวด'},
  {id:'capsule', no:6, th:'ห้องบรรจุแคปซูล', en:'Capsule Filling', x0:11.0,y0:0,x1:13.8,y1:4.8, floor:'epoxy', grp:'prod',
-  desc:'เครื่องบรรจุแคปซูลและสายลำเลียง รับ bulk จากห้องผสมผ่านไลน์ผลิต'},
+  desc:'เครื่องบรรจุแคปซูลและสายลำเลียง รับ bulk จากห้องผสม ส่งต่อห้องขัดเม็ดยาผ่านไลน์ผลิต'},
  {id:'ipc', th:'ห้อง IPC', en:'In-process Control', x0:13.8,y0:0,x1:16.0,y1:4.8, floor:'vinyl', grp:'support',
   desc:'ตรวจสอบระหว่างผลิต — ชั่งสอบน้ำหนัก เช็กสเปกทุกช่วงการรันของทุกสาย'},
- {id:'blister', th:'ห้องจัดแผง', en:'Blister Packing', x0:16.0,y0:0,x1:18.6,y1:4.8, floor:'epoxy', grp:'prod',
-  desc:'เครื่องอัดแผงบลิสเตอร์สำหรับแคปซูล/เม็ด พร้อมโต๊ะตรวจนับ'},
+ {id:'blister', th:'ห้องขัดเม็ดยา', en:'Tablet Polishing', x0:16.0,y0:0,x1:18.6,y1:4.8, floor:'epoxy', grp:'prod',
+  desc:'เครื่องขัดเม็ดยา (deduster/polisher) ขัดผิว คัดฝุ่น และคัดแยกเม็ดก่อนส่งเข้าสายบรรจุ พร้อมโต๊ะตรวจคุณภาพเม็ด'},
  {id:'bottlefill', th:'ห้องบรรจุใส่ขวด / กระปุก', en:'Bottle / Jar Filling', x0:18.6,y0:0,x1:21.5,y1:4.8, floor:'epoxy', grp:'prod',
   desc:'สายบรรจุแคปซูล/เม็ดลงขวด-กระปุก พร้อมเครื่องปิดฝาและสายลำเลียง'},
  {id:'labelroom', th:'ห้องติดฉลาก', en:'Labelling Room', x0:21.5,y0:0,x1:24.0,y1:4.8, floor:'epoxy', grp:'prod',
   desc:'ติดฉลาก ตรวจนับ และบรรจุกล่อง ก่อนส่งเข้าคลังสำเร็จรูปผ่าน A/L ท้ายไลน์'},
- {id:'fg', th:'ห้องเก็บผลิตภัณฑ์สำเร็จรูป', en:'Finished Goods Store', x0:24.0,y0:1.8,x1:28,y1:4.8, floor:'concrete', grp:'store',
+ {id:'fg', th:'ห้องเก็บผลิตภัณฑ์สำเร็จรูป', en:'Finished Goods Store', x0:24.0,y0:0,x1:28,y1:4.8, floor:'concrete', grp:'store',
   desc:'คลังสำเร็จรูปฝั่งตะวันออก รับสินค้าผ่าน A/L ท้ายไลน์ — คนละฝั่งกับทางเข้าวัตถุดิบ จ่ายออกประตูตะวันออก'},
- {id:'lblstore', th:'ห้องเก็บฉลากบรรจุภัณฑ์', en:'Label Store', x0:24.0,y0:0,x1:28,y1:1.8, floor:'vinyl', grp:'store',
-  desc:'ตู้ล็อกเก็บฉลากและบรรจุภัณฑ์พิมพ์ ควบคุมการเบิกจ่ายกันปะปนข้ามรุ่น'}
+ {id:'lblstore', th:'ห้องเก็บฉลากบรรจุภัณฑ์', en:'Label Store', x0:21.6,y0:10.3,x1:24.0,y1:12, floor:'vinyl', grp:'store',
+  desc:'ห้องล็อกเก็บฉลากและบรรจุภัณฑ์พิมพ์ อยู่ติดกับห้องเก็บวัสดุบรรจุ (เข้าออกผ่านกันได้) ควบคุมการเบิกจ่ายกันปะปนข้ามรุ่น'}
 ];
 
 var ZONES = [
@@ -423,23 +423,22 @@ wallRun(8.9,7.2,8.9,12,{});
 wallRun(11.2,7.2,11.2,12,{});
 wallRun(13.5,7.2,13.5,12,{});
 wallRun(15.8,7.2,15.8,12,{});
-wallRun(18.6,7.2,18.6,12,{});
+wallRun(18.6,7.2,18.6,12,{gaps:[{c:7.8,w:.9,type:'door',swing:-1}]}); // A/L -> liquid mixing
 wallRun(21.6,7.2,21.6,12,{});
 wallRun(24.0,7.2,24.0,12,{});
 wallRun(26.1,7.2,26.1,12,{});
-// liquid-filling airlock box (inside liqfill room)
-wallRun(16.3,7.2,16.3,8.4,{});
-wallRun(17.5,7.2,17.5,8.4,{});
-wallRun(16.3,8.4,17.5,8.4,{gaps:[{c:16.9,w:.95,type:'door',swing:1}]});
+wallRun(21.6,10.3,24,10.3,{gaps:[{c:22.3,w:.9,type:'door',swing:1}]}); // label store inside pkmat
+// liquid-line airlock: shared vestibule (corridor <-> filling <-> mixing)
+wallRun(17.4,7.2,17.4,8.4,{});
+wallRun(17.4,8.4,18.6,8.4,{gaps:[{c:18.0,w:.9,type:'door',swing:1}]});
 // y=7.2 run — north rooms onto the line
 wallRun(0,7.2,28,7.2,{gaps:[
-  {c:4.4,w:1.1,type:'door',swing:-1},        // raw material store
+  {c:4.4,w:1.4,type:'door',swing:-1},        // raw material store (wide: 4 flow lanes)
   {c:7.75,w:.95,type:'door',swing:-1},       // sampling
   {c:10.05,w:.95,type:'door',swing:-1},      // washing
   {c:12.35,w:.95,type:'door',swing:-1},      // drying
   {c:14.65,w:.95,type:'door',swing:-1},      // clean equipment
-  {c:16.9,w:1.0,type:'door',swing:-1},       // liquid filling A/L (outer)
-  {c:19.35,w:1.0,type:'door',swing:-1},      // liquid mixing (clear of grid column)
+  {c:18.0,w:.9,type:'door',swing:-1},        // liquid A/L (outer)
   {c:20.9,w:.7,type:'window'},
   {c:22.1,w:.9,type:'door',swing:-1},        // packaging materials
   {c:25.05,w:.9,type:'door',swing:-1},       // stability
@@ -464,8 +463,7 @@ wallRun(13.8,0,13.8,4.8,{});
 wallRun(16.0,0,16.0,4.8,{});
 wallRun(18.6,0,18.6,4.8,{});
 wallRun(21.5,0,21.5,4.8,{});
-wallRun(24.0,0,24.0,4.8,{gaps:[{c:0.9,w:.9,type:'door',swing:1}]}); // labelling -> label store
-wallRun(24.0,1.8,28,1.8,{gaps:[{c:26.8,w:.9,type:'door',swing:-1}]}); // label store -> FG
+wallRun(24.0,0,24.0,4.8,{});
 
 // ---- columns on the 4 m grid
 (function(){
