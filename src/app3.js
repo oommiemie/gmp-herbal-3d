@@ -496,7 +496,7 @@ function frame(){
     }
     L.el.style.display='block';
     L.el.style.opacity=op;
-    L.el.style.transform='translate(-50%,-110%) translate('+(v.x+1)/2*wdt+'px,'+(1-v.y)/2*hgt+'px)';
+    L.el.style.transform='translate(-50%,-114%) translate('+(v.x+1)/2*wdt+'px,'+(1-v.y)/2*hgt+'px)';
   }
   // swing doors: open when the walker approaches, else stay closed
   for(var di=0;di<DOORS.length;di++){
